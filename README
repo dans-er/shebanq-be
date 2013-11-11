@@ -1,0 +1,5 @@
+shebanq-be (shabanq back-end) provides modules that act as a bridge between
+
+- Emdros (http://emdros.org/) the database engine for analyzed or annotated text and
+- CLAM (http://proycon.github.io/clam/) the Computational Linguistics Application Mediator.
+

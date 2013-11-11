@@ -13,7 +13,7 @@ setup(
     keywords = "emdros clam webservice rest mql",
     url = "http://dans.knaw.nl",
     packages=['emdros'],
-    # long_description=read('README'),
+    long_description=read('README'),
     install_requires=['clam']
 )
 
