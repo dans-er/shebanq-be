@@ -1,0 +1,91 @@
+// This query by Hendrik Jan looks for acrostic verses in a chapter.
+// We allow for a heading at the beginning of the first verse, as in
+// Ps 145.
+
+// ident @(#)lq04.mql	1.1 04/02/24
+
+/*
+<metadata>
+<meta type="research_question">Acrostic verses.</meta> 
+<meta type="researcher" value="Hendrik Jan"/>
+<meta type="date_created" value="2004-02-24"/>
+<meta type="date_run" value="2012-01-27"/>
+<meta type="description">It looks for acrostic verses in a chapter. We allow for a heading at the beginning of the first verse, as in Ps 145.</meta>
+<meta type="publications"></meta>
+</metadata>
+*/
+
+//==========
+select all objects where
+[chapter
+   // The word with the aleph is not the first word of the verse when
+   // there is a heading as in Ps 145.
+   [verse
+      [word FOCUS surface_consonants ~ '^>']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^B']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^G']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^D']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^H']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^W']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^Z']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^X']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^V']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^J']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^K']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^L']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^M']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^N']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^S']
+   ]
+   // The order of < and P may be reversed as in Thr 2-4.
+   [verse
+      [word FOCUS first surface_consonants ~ '^[<P]']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^[P<]']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^Y']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^Q']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^R']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^[CF]']
+   ]
+   [verse
+      [word FOCUS first surface_consonants ~ '^T']
+   ]
+]
+go

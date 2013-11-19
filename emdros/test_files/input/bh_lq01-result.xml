@@ -1,0 +1,945 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?><!DOCTYPE mql_results [
+  <!ELEMENT mql_results (mql_result)* >
+  <!ELEMENT mql_result ((mql_progress)?, status, (error)?, (warning)?, (table|sheaf|flatsheaf)?) >
+  <!ELEMENT mql_progress (#PCDATA)* >
+  <!ELEMENT status EMPTY >
+  <!ELEMENT error (error_source, error_stage, 
+                   error_message_db, error_message_compiler) >
+  <!ELEMENT error_source EMPTY >
+  <!ELEMENT error_stage EMPTY >
+  <!ELEMENT error_message_db (#PCDATA)* >
+  <!ELEMENT error_message_compiler (#PCDATA)* >
+  <!ELEMENT warning (#PCDATA)* >
+  <!ATTLIST mql_results >
+  <!ATTLIST mql_result  >
+  <!ATTLIST status 
+                success (true|false) #REQUIRED >
+  <!ATTLIST error >
+  <!ATTLIST error_source 
+                source  (compiler|db) #REQUIRED >
+  <!ATTLIST error_stage  
+                stage   (none|parse|weed|symbol|type|monads|exec) #REQUIRED >
+  <!ATTLIST error_message_db >
+  <!ATTLIST error_message_compiler >
+  <!ATTLIST warning >
+  <!ELEMENT table (theader, trow*) >
+  <!ELEMENT theader (theadercolumn)* >
+  <!ELEMENT theadercolumn (tcaption, ttype) >
+  <!ELEMENT tcaption (#PCDATA)* >
+  <!ELEMENT ttype EMPTY >
+  <!ELEMENT trow (tcolumn)* >
+  <!ELEMENT tcolumn (#PCDATA)* >
+  <!ATTLIST table >
+  <!ATTLIST theader >
+  <!ATTLIST theadercolumn >
+  <!ATTLIST tcaption >
+  <!ATTLIST ttype 
+     type (bool|string|integer|id_d|enum|list_of_integer|list_of_id_d|list_of_enum|set_of_monads) #REQUIRED
+     enum_type CDATA #IMPLIED >
+  <!ATTLIST trow >
+  <!ATTLIST tcolumn >
+  <!ELEMENT sheaf (straw)* >
+  <!ELEMENT straw (matched_object)* >
+  <!ELEMENT matched_object (monad_set, (features)?, (sheaf)?) >
+  <!ELEMENT monad_set (mse)+ >
+  <!ELEMENT mse EMPTY>
+  <!ELEMENT features (feature)+ >
+  <!ELEMENT feature (#PCDATA) >
+  <!ATTLIST sheaf >
+  <!ATTLIST straw >
+  <!ATTLIST matched_object 
+            object_type_name CDATA #REQUIRED 
+            focus (false | true) #REQUIRED
+            marks (CDATA) #IMPLIED
+            id_d CDATA "nil"
+  >
+  <!ATTLIST monad_set >
+  <!ATTLIST mse
+            first CDATA #REQUIRED
+            last  CDATA #REQUIRED
+  >
+  <!ATTLIST feature
+            feature_name CDATA #REQUIRED
+            feature_type (string|integer|id_d|enum|list_of_integer|list_of_id_d|list_of_enum) #REQUIRED
+            enum_type CDATA #IMPLIED 
+  >
+  <!ELEMENT flatsheaf (flatstraw)* >
+  <!ELEMENT flatstraw (matched_object)* >
+  <!ATTLIST flatstraw
+      object_type_name CDATA #REQUIRED >
+]>
+
+<mql_results>
+   
+   <mql_result>
+      <mql_progress>
+         
+      </mql_progress>
+      <sheaf>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="31691">
+               <monad_set>
+                  <mse first="14845" last="14848"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="68592">
+                        <monad_set>
+                           <mse first="14846" last="14846"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="14847">
+                                 <monad_set>
+                                    <mse first="14846" last="14846"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="68593">
+                        <monad_set>
+                           <mse first="14847" last="14847"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="68594">
+                        <monad_set>
+                           <mse first="14848" last="14848"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="124724">
+               <monad_set>
+                  <mse first="43967" last="43981"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="153326">
+                        <monad_set>
+                           <mse first="43968" last="43968"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="113223">
+                                 <monad_set>
+                                    <mse first="43968" last="43968"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="153327">
+                        <monad_set>
+                           <mse first="43969" last="43972"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="153329">
+                        <monad_set>
+                           <mse first="43977" last="43981"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="194162">
+               <monad_set>
+                  <mse first="66941" last="66945"/>
+                  <mse first="66949" last="66956"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="215680">
+                        <monad_set>
+                           <mse first="66942" last="66942"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="188882">
+                                 <monad_set>
+                                    <mse first="66942" last="66942"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="215681">
+                        <monad_set>
+                           <mse first="66943" last="66943"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="215682">
+                        <monad_set>
+                           <mse first="66944" last="66945"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="381293">
+               <monad_set>
+                  <mse first="117464" last="117478"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="395424">
+                        <monad_set>
+                           <mse first="117465" last="117465"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="370178">
+                                 <monad_set>
+                                    <mse first="117465" last="117465"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="395425">
+                        <monad_set>
+                           <mse first="117466" last="117466"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="395426">
+                        <monad_set>
+                           <mse first="117467" last="117467"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="425381">
+               <monad_set>
+                  <mse first="133239" last="133243"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="442324">
+                        <monad_set>
+                           <mse first="133240" last="133240"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="415593">
+                                 <monad_set>
+                                    <mse first="133240" last="133240"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="442325">
+                        <monad_set>
+                           <mse first="133241" last="133242"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="442326">
+                        <monad_set>
+                           <mse first="133243" last="133243"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="477168">
+               <monad_set>
+                  <mse first="145655" last="145661"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="499364">
+                        <monad_set>
+                           <mse first="145656" last="145656"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="461054">
+                                 <monad_set>
+                                    <mse first="145656" last="145656"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="499365">
+                        <monad_set>
+                           <mse first="145657" last="145658"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="499366">
+                        <monad_set>
+                           <mse first="145659" last="145659"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="477603">
+               <monad_set>
+                  <mse first="147646" last="147653"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="500677">
+                        <monad_set>
+                           <mse first="147647" last="147647"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="463045">
+                                 <monad_set>
+                                    <mse first="147647" last="147647"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="500679">
+                        <monad_set>
+                           <mse first="147649" last="147651"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="500680">
+                        <monad_set>
+                           <mse first="147652" last="147653"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="480394">
+               <monad_set>
+                  <mse first="160954" last="160959"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="509267">
+                        <monad_set>
+                           <mse first="160955" last="160955"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="476353">
+                                 <monad_set>
+                                    <mse first="160955" last="160955"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="509268">
+                        <monad_set>
+                           <mse first="160956" last="160957"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="509269">
+                        <monad_set>
+                           <mse first="160958" last="160959"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="653671">
+               <monad_set>
+                  <mse first="207208" last="207211"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="676123">
+                        <monad_set>
+                           <mse first="207209" last="207209"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="645571">
+                                 <monad_set>
+                                    <mse first="207209" last="207209"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="676124">
+                        <monad_set>
+                           <mse first="207210" last="207210"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="676125">
+                        <monad_set>
+                           <mse first="207211" last="207211"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="715819">
+               <monad_set>
+                  <mse first="222010" last="222013"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="746486">
+                        <monad_set>
+                           <mse first="222011" last="222011"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="699890">
+                                 <monad_set>
+                                    <mse first="222011" last="222011"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="746487">
+                        <monad_set>
+                           <mse first="222012" last="222012"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="746488">
+                        <monad_set>
+                           <mse first="222013" last="222013"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="715863">
+               <monad_set>
+                  <mse first="222190" last="222193"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="746610">
+                        <monad_set>
+                           <mse first="222191" last="222191"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="700070">
+                                 <monad_set>
+                                    <mse first="222191" last="222191"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="746611">
+                        <monad_set>
+                           <mse first="222192" last="222192"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="746612">
+                        <monad_set>
+                           <mse first="222193" last="222193"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="718176">
+               <monad_set>
+                  <mse first="230974" last="230978"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="752762">
+                        <monad_set>
+                           <mse first="230975" last="230975"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="708854">
+                                 <monad_set>
+                                    <mse first="230975" last="230975"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="752763">
+                        <monad_set>
+                           <mse first="230976" last="230977"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="752764">
+                        <monad_set>
+                           <mse first="230978" last="230978"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="718431">
+               <monad_set>
+                  <mse first="231893" last="231896"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="753424">
+                        <monad_set>
+                           <mse first="231894" last="231894"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="709773">
+                                 <monad_set>
+                                    <mse first="231894" last="231894"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="753425">
+                        <monad_set>
+                           <mse first="231895" last="231895"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="753426">
+                        <monad_set>
+                           <mse first="231896" last="231896"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="718943">
+               <monad_set>
+                  <mse first="233848" last="233851"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="754794">
+                        <monad_set>
+                           <mse first="233849" last="233849"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="711728">
+                                 <monad_set>
+                                    <mse first="233849" last="233849"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="754795">
+                        <monad_set>
+                           <mse first="233850" last="233850"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="754796">
+                        <monad_set>
+                           <mse first="233851" last="233851"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="719043">
+               <monad_set>
+                  <mse first="234288" last="234296"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="755101">
+                        <monad_set>
+                           <mse first="234290" last="234290"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="712169">
+                                 <monad_set>
+                                    <mse first="234290" last="234290"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="755102">
+                        <monad_set>
+                           <mse first="234291" last="234292"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="755103">
+                        <monad_set>
+                           <mse first="234293" last="234296"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="804056">
+               <monad_set>
+                  <mse first="238509" last="238515"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="836100">
+                        <monad_set>
+                           <mse first="238510" last="238510"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="776196">
+                                 <monad_set>
+                                    <mse first="238510" last="238510"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="836101">
+                        <monad_set>
+                           <mse first="238511" last="238511"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="836102">
+                        <monad_set>
+                           <mse first="238512" last="238512"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="804692">
+               <monad_set>
+                  <mse first="241257" last="241264"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="837895">
+                        <monad_set>
+                           <mse first="241257" last="241258"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="778944">
+                                 <monad_set>
+                                    <mse first="241258" last="241258"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="837896">
+                        <monad_set>
+                           <mse first="241259" last="241261"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="837897">
+                        <monad_set>
+                           <mse first="241262" last="241264"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="805361">
+               <monad_set>
+                  <mse first="244198" last="244201"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="839777">
+                        <monad_set>
+                           <mse first="244199" last="244199"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="781885">
+                                 <monad_set>
+                                    <mse first="244199" last="244199"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="839778">
+                        <monad_set>
+                           <mse first="244200" last="244200"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="839779">
+                        <monad_set>
+                           <mse first="244201" last="244201"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="1064627">
+               <monad_set>
+                  <mse first="323319" last="323321"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="1102377">
+                        <monad_set>
+                           <mse first="323319" last="323319"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="1046469">
+                                 <monad_set>
+                                    <mse first="323319" last="323319"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1102378">
+                        <monad_set>
+                           <mse first="323320" last="323320"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1102379">
+                        <monad_set>
+                           <mse first="323321" last="323321"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="1068829">
+               <monad_set>
+                  <mse first="338025" last="338028"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="1112752">
+                        <monad_set>
+                           <mse first="338026" last="338026"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="1061176">
+                                 <monad_set>
+                                    <mse first="338026" last="338026"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1112753">
+                        <monad_set>
+                           <mse first="338027" last="338027"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1112754">
+                        <monad_set>
+                           <mse first="338028" last="338028"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+         <straw>
+            <matched_object object_type_name="clause" focus="false" id_d="1323710">
+               <monad_set>
+                  <mse first="391284" last="391287"/>
+               </monad_set>
+               <sheaf>
+                  <straw>
+                     <matched_object object_type_name="phrase" focus="false" id_d="1331931">
+                        <monad_set>
+                           <mse first="391285" last="391285"/>
+                        </monad_set>
+                        <sheaf>
+                           <straw>
+                              <matched_object object_type_name="word" focus="true" id_d="1319602">
+                                 <monad_set>
+                                    <mse first="391285" last="391285"/>
+                                 </monad_set>
+                                 <sheaf>
+                                 </sheaf>
+                              </matched_object>
+                           </straw>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1331932">
+                        <monad_set>
+                           <mse first="391286" last="391286"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                     <matched_object object_type_name="phrase" focus="true" id_d="1331933">
+                        <monad_set>
+                           <mse first="391287" last="391287"/>
+                        </monad_set>
+                        <sheaf>
+                        </sheaf>
+                     </matched_object>
+                  </straw>
+               </sheaf>
+            </matched_object>
+         </straw>
+      </sheaf>
+      <status success="true"/>
+   </mql_result>
+   
+</mql_results>

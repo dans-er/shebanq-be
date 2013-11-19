@@ -1,0 +1,34 @@
+// This query looks for infinitives absolute that modify a predicate of
+// a different lexeme. See Gesenius-Kautzsch 113.
+
+// ident @(#)lq06.mql	1.2 04/02/27
+
+/*
+<metadata>
+<meta type="research_question">absolute infinitives</meta> 
+<meta type="researcher" value="WIVU"/>
+<meta type="date_created" value="2004-02-27"/>
+<meta type="date_run" value="2012-01-27"/>
+<meta type="description"> This query looks for infinitives absolute that modify a predicate of a different lexeme. See Gesenius-Kautzsch 113.</meta>
+<meta type="publications"></meta>
+</metadata>
+*/
+
+//==========
+select all objects where
+
+[clause
+   [phrase phrase_function = Modi
+      [word FOCUS as w1
+	 tense = infinitive_absolute
+      ]
+   ]
+   ..
+   [phrase phrase_function = Pred or phrase_function = PreO
+      [word FOCUS
+	 part_of_speech = verb and lexeme <> w1.lexeme
+      ]
+   ]
+]
+
+go
