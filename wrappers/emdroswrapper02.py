@@ -5,26 +5,14 @@
 import sys
 import os
 import logging
-import subprocess
+from emdros.command import MQL
+from emdros.command import RenderObjects
+from emdros.command import EmdrosException
 
 #import CLAM-specific modules:
 import clam.common.data
 import clam.common.status
 
-def query(queryFilename, resultFilename):
-    res_out = open(resultFilename, "w")
-    error_out = open("error.txt", "w")
-    p = subprocess.Popen(["mql", "-b", "s3", "-d", "/data/emdros/wivu/s3/bhs3", queryFilename, "--xml"],
-                         stdout=res_out,
-                         stderr=error_out)
-    p.wait()
-    rc = p.returncode
-    if (rc != 0):
-        logging.error("Exception while executing " + os.path.basename(queryFilename) + " returncode=" + str(rc))
-    else:
-        logging.info("Got result: " + os.path.basename(resultFilename))
-    res_out.close()
-    error_out.close()
 
 #this script takes three arguments: $DATAFILE $STATUSFILE $OUTPUTDIRECTORY
 datafile = sys.argv[1]
@@ -41,15 +29,68 @@ logging.basicConfig(
 #Obtain all data from the CLAM system (stored in $DATAFILE (clam.xml))
 clamdata = clam.common.data.getclamdata(datafile)
 
-clam.common.status.write(statusfile, "Iterating over " + str(len(clamdata.input)) + " input files...")
+filecount = str(len(clamdata.input))
+
+clam.common.status.write(statusfile, "Iterating over " + filecount + " input files...")
+mql = MQL()
+ro = RenderObjects()
+
+
+def execute_query(inputfile, result_filename, queryname):
+    try:
+        mql.execute_file(str(inputfile), result_filename)
+
+        logging.info("Successfully queried file '" + queryname + "'")
+        return True
+    except EmdrosException:
+        os.rename(result_filename, result_filename + ".error")
+        msg = "Error while executing query '" + queryname + "'. See " \
+              + os.path.basename(result_filename) + ".error for details."
+        print >> sys.stderr, "[emdroswrapper02] ERROR: " + msg
+        logging.error(msg)
+        clam.common.status.write(statusfile, msg)
+        pass
+        return False
+
+def find_context(result_filename, context_filename, stylesheet_name, queryname):
+    directory = os.path.dirname(os.path.realpath(__file__))
+    json_filename = directory + "/fetchinfo.json"
+    context_file = open(context_filename, "a")
+    context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<context_list>")
+    context_file.flush()
+
+    try:
+        ro.find_objects(result_filename, json_filename, context_file, stylesheet_name)
+
+        logging.info("Found context list for file '" + queryname + "'")
+    except EmdrosException as eex:
+        context_file.writelines("<error>\n" + str(eex.args) + "\n</error>")
+        raise eex
+    finally:
+        context_file.writelines("</context_list>")
+        context_file.close()
+
+
 #Iterate over all inputfiles:
 for inputfile in clamdata.input:
-    resultname = outputdir + os.path.splitext(os.path.basename(str(inputfile)))[0] + "-result.xml"
-    logging.info("blaaa " + resultname)
-    if isinstance(inputfile.metadata, clam.common.formats.PlainTextFormat):
-        query(str(inputfile), resultname)
-    else:
-        clam.common.status.write(statusfile, "Skipping " + str(inputfile) + ", invalid format")
+    queryname = os.path.basename(str(inputfile))     # bh_lq01.mql
+    filename = os.path.splitext(queryname)           # [ bh_lq01, .mql ]
+    result_filename = outputdir + filename[0] + "-result.xml"
+    context_filename = outputdir + filename[0] + "-context.xml"
+
+    result = execute_query(inputfile, result_filename, queryname)
+
+    if (result):
+        try:
+            find_context(result_filename, context_filename, "base", queryname)
+        except EmdrosException as eex:
+            os.rename(context_filename, context_filename + ".error")
+            msg = "Error while gathering context for '" + queryname + "'.\n" + str(eex.args) + "\nSee " \
+                 + os.path.basename(context_filename) + ".error for details."
+            print >> sys.stderr, "[emdroswrapper02] ERROR: " + msg
+            logging.error(msg)
+            clam.common.status.write(statusfile, msg)
+            pass
 
 clam.common.status.write(statusfile, "Done", 100)
 

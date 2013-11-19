@@ -19,7 +19,7 @@ SYSTEM_DESCRIPTION = "Interface for issuing mql-queries on an Emdros database an
 
 #The root directory for CLAM, all project files, (input & output) and
 #pre-installed corpora will be stored here. Set to an absolute path:
-ROOT = "/tmp/clamdros/"
+ROOT = "/tmp/clamdros02/"
 
 #The URL of the system
 #URL = "http://localhost:8080"

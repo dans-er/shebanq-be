@@ -1,0 +1,50 @@
+{
+	"fetchinfo" : {
+		"dictionaries" : {
+        	"book2division" : {
+            	"Genesis" : "Towrah",
+            	"Exodus" : "Towrah",
+            	"Psalsm" : "Kethuvim",
+            	"Isaiah" : "Nebiim",
+            }
+		},
+		"base" : {
+			"object_types" : {
+				"book" : {
+					"start" : "{{ setvar 'curBook' }}{{ feature 0 }}{{ setvarend }}{{ setvar 'division' }}{{ dictlookup 'book2division' var 'curBook' 'Unknown' }}{{ setvarend }}",
+					"get" : ["book"],
+					"end" : "",
+		  		},
+		  		"verse" : {
+					"start" : "\n<v d=\"{{ emitvar 'division' }}\" b=\"{{ emitvar 'curBook' }}\" c=\"{{ feature 1 }}\" v=\"{{ feature 2 }}\">",
+					"get" : ["book", "chapter", "verse"],
+					"end" : "\n</v>",
+		  		},
+				"sentence" : {
+					"start" : "\n<s id_d=\"{{ feature 0 }}\">",
+					"get" : ["self"],
+					"end" : "\n</s>",
+		  		},
+				"word" : {
+					"start" : "\n<w fm=\"{{ firstmonad }}\">{{ feature 0 }}",
+					"get" : ["text",],
+					"end" : "</w>",
+		  		},
+			},
+			"priority_list" : [
+				"verse",
+				"sentence",
+          		"word",
+      		],
+      		"postprocess" : [
+           		{
+           	    	"prefix" : "\n<context>",
+           		},
+           		{
+           	    	"suffix" : "\n</context>\n",
+           		},
+      		],
+      		"prepend_XML_declaration" : false,
+		}
+	}
+}
