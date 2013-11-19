@@ -2,3 +2,5 @@
 dist/
 shebanq_be.egg-info/
 */**/*.pyc
+emdros/test_files/output/*
+
