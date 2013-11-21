@@ -38,10 +38,10 @@
       		],
       		"postprocess" : [
            		{
-           	    	"prefix" : "\n<context>",
+           	    	"prefix" : "\n<context_part>",
            		},
            		{
-           	    	"suffix" : "\n</context>\n",
+           	    	"suffix" : "\n</context_part>",
            		},
       		],
       		"prepend_XML_declaration" : false,

@@ -18,7 +18,7 @@ class TestMQL(unittest.TestCase):
 
     def test_execute_file(self):
         mql = MQL()
-        query_filename = "test_files/input/bh_lq04.mql"
+        query_filename = "test_files/input/bh_lq08.mql"
 
         expectations = {MQL.ResultFormat.console: "[ phrase",
                         MQL.ResultFormat.compact_xml: "<sheaf><straw><matched_object",

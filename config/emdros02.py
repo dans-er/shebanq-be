@@ -55,10 +55,11 @@ PROFILES = [
 COMMAND = sys.path[0] + "/wrappers/emdroswrapper02.py $DATAFILE $STATUSFILE $OUTPUTDIRECTORY $PARAMETERS > $OUTPUTDIRECTORY/log"
 
 PARAMETERS =  [
-    ('Group title', [
+    ('Context level', [
         #BooleanParameter(id='createlexicon',name='Create Lexicon',description='Generate a separate overall lexicon?'),
         #ChoiceParameter(id='casesensitive',name='Case Sensitivity',description='Enable case sensitive behaviour?', choices=['yes','no'],default='no'),
         #StringParameter(id='author',name='Author',description='Sign output metadata with the specified author name',maxlength=255),
+        IntegerParameter(id='contextlevel',name='Offset',description='Limit result context to straw depth',default=0)
     ] )
 ]
 

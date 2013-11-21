@@ -29,9 +29,13 @@ logging.basicConfig(
 #Obtain all data from the CLAM system (stored in $DATAFILE (clam.xml))
 clamdata = clam.common.data.getclamdata(datafile)
 
-filecount = str(len(clamdata.input))
+total_filecount = len(clamdata.input)
+context_level = clamdata.parameter("contextlevel").value
 
-clam.common.status.write(statusfile, "Iterating over " + filecount + " input files...")
+
+clam.common.status.write(statusfile, "Iterating over " + str(total_filecount) + " input files..." )
+clam.common.status.write(statusfile, "Context level is " + str(context_level))
+
 mql = MQL()
 ro = RenderObjects()
 
@@ -56,11 +60,12 @@ def find_context(result_filename, context_filename, stylesheet_name, queryname):
     directory = os.path.dirname(os.path.realpath(__file__))
     json_filename = directory + "/fetchinfo.json"
     context_file = open(context_filename, "a")
-    context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<context_list>")
+    context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    context_file.writelines("<context_list level=\"" + str(context_level) + "\">")
     context_file.flush()
 
     try:
-        ro.find_objects(result_filename, json_filename, context_file, stylesheet_name)
+        ro.find_objects(result_filename, json_filename, context_file, stylesheet_name, context_level)
 
         logging.info("Found context list for file '" + queryname + "'")
     except EmdrosException as eex:
@@ -91,6 +96,7 @@ for inputfile in clamdata.input:
             logging.error(msg)
             clam.common.status.write(statusfile, msg)
             pass
+
 
 clam.common.status.write(statusfile, "Done", 100)
 

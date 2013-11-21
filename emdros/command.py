@@ -7,6 +7,7 @@ import props
 import io
 
 
+
 def version(process):
     """Return version information."""
     p = subprocess.Popen([process, "--version"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -41,10 +42,9 @@ class EmdrosProcess():
 
 class MQL(EmdrosProcess):
     """Handles mql-queries"""
-    process = EmdrosProcess.mql
 
     def __init__(self):
-        pass
+        self.process = EmdrosProcess.mql
 
     class ResultFormat():
         xml = "--xml"
@@ -91,10 +91,9 @@ class MQL(EmdrosProcess):
 
 class RenderObjects(EmdrosProcess):
     """Handles renderobjects processing"""
-    process = EmdrosProcess.render_objects
 
     def __init__(self):
-        pass
+        self.process = EmdrosProcess.render_objects
 
     def execute(self, json_filename, result_file, first_monad, last_monad, stylesheet_name = props.ro_stylesheet):
         """Execute renderobjects
@@ -127,12 +126,19 @@ class RenderObjects(EmdrosProcess):
             raise EmdrosException("Render objects finished with exit code " + str(rc) + "\n" + errmsg)
 
 
-    def find_objects(self, mql_result_filename, json_filename, result_file, stylesheet_name = props.ro_stylesheet):
+    def find_objects(self, mql_result_filename, json_filename, result_file,
+                     stylesheet_name = props.ro_stylesheet, context_level = 0):
         """Find context objects for mql result.
 
 
+        :param mql_result_filename:
+        :param json_filename:
+        :param result_file:
+        :param stylesheet_name:
+        :param context_level:
         """
-        handler = FindObjectsHandler(self, json_filename, result_file, stylesheet_name)
+
+        handler = FindObjectsHandler(self, json_filename, result_file, stylesheet_name, context_level)
         source = open(mql_result_filename)
         try:
             xml.sax.parse(source, handler)
@@ -144,12 +150,7 @@ class FindObjectsHandler(xml.sax.ContentHandler):
     """Content handler for finding context objects.
 
     """
-    #ro = None
-    #json_filename = ""
-    #result_file = None
-    #stylesheet_name = ""
-    #straw_level = 0
-    def __init__(self, ro, json_filename, result_file, stylesheet_name):
+    def __init__(self, ro, json_filename, result_file, stylesheet_name, context_level):
         xml.sax.ContentHandler.__init__(self)
         assert isinstance(ro, RenderObjects)
         assert isinstance(result_file, file)
@@ -157,25 +158,51 @@ class FindObjectsHandler(xml.sax.ContentHandler):
         self.json_filename = json_filename
         self.result_file = result_file
         self.stylesheet_name = stylesheet_name
-        self.straw_level = 0
+        self.context_level = context_level
+
+        self.straw_level = -1
+        self.context_monatset = []
+        self.focus = False
+        self.focus_monatset = []
 
     def startElement(self, name, attrs):
         if name == "straw":
             self.straw_level += 1
-        if name == "mse" and self.straw_level == 1:
+
+        if name == "matched_object":
+            self.focus = attrs.getValue("focus") == "true"
+
+        if name == "mse" and self.straw_level == self.context_level:
             first_monad = int(attrs.getValue("first"))
             last_monad = int(attrs.getValue("last"))
+            self.context_monatset.append([first_monad, last_monad])
 
-            self.ro.execute(self.json_filename, self.result_file, first_monad, last_monad, self.stylesheet_name)
-
+        if name == "mse" and self.focus:
+            first_monad = int(attrs.getValue("first"))
+            last_monad = int(attrs.getValue("last"))
+            self.focus_monatset.append([first_monad, last_monad])
 
     def endElement(self, name):
         if name == "straw":
             self.straw_level -= 1
 
+        if name == "matched_object":
+            self.focus = False
 
+        if name == "matched_object" and self.straw_level == self.context_level:
+            self.result_file.writelines("\n<context>")
 
+            for first_monad, last_monad in self.focus_monatset:
+                self.result_file.writelines("\n<focus first=\"" + str(first_monad)
+                                                + "\" last=\"" + str(last_monad) + "\"/>")
+            self.result_file.flush()
+            for first_monad, last_monad in self.context_monatset:
+                self.ro.execute(self.json_filename, self.result_file, first_monad, last_monad, self.stylesheet_name)
 
+            self.result_file.writelines("\n</context>")
+            self.result_file.flush()
+            self.focus_monatset =[]
+            self.context_monatset = []
 
 
 

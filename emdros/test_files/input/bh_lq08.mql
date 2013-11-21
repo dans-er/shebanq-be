@@ -1,0 +1,41 @@
+// This query looks for clauses with an infinitive absolute in the role
+// of object. See Gesenius-Kautzsch 113d.
+
+// ident @(#)lq08.mql	1.1 04/02/27
+
+/*
+<metadata>
+<meta type="research_question">absolute infinitives</meta> 
+<meta type="researcher" value="WIVU"/>
+<meta type="date_created" value="2004-02-27"/>
+<meta type="date_run" value="2012-01-27"/>
+<meta type="description">This query looks for clauses with an infinitive absolute in the role of object. See Gesenius-Kautzsch 113d.
+We allow for a second form in which the infinitive absolute is the predicate of an object clause. This parsing is required if the infinitive has an object or a complement.</meta>
+<meta type="publications"></meta>
+</metadata>
+*/
+
+//==========
+select all objects where
+
+[clause
+   [phrase phrase_function = Objc
+      [word FOCUS tense = infinitive_absolute]
+   ]
+]
+
+go
+
+// We allow for a second form in which the infinitive absolute is the
+// predicate of an object clause. This parsing is required if the
+// infinitive has an object or a complement.
+
+select all objects where
+
+[clause clause_constituent_relation = Objc
+   [phrase phrase_function = Pred
+      [word FOCUS tense = infinitive_absolute]
+   ]
+]
+
+go
