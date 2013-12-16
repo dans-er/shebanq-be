@@ -47,19 +47,19 @@ class TestRenderObjects(unittest.TestCase):
     def test_find_objects(self):
         ro = RenderObjects()
         json_filename = "test_files/input/ro_01.json"
-        mql_result_filename = "test_files/input/bh_lq08-result.xml"
+        mql_result_filename = "test_files/input/bh_lq01-result.xml"
 
 
         result_filename = "test_files/output/" \
             + os.path.splitext(os.path.basename(mql_result_filename))[0] \
             + "-context" \
-            + ".txt"
+            + ".xml"
 
         result_file = open(result_filename, "a")
         result_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<context_list>")
         result_file.flush()
 
-        ro.find_objects(mql_result_filename, json_filename, result_file, context_level=1)
+        ro.find_objects(mql_result_filename, json_filename, result_file, context_level=0)
 
         result_file.writelines("</context_list>")
         result_file.close()

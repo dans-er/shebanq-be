@@ -60,7 +60,7 @@ def find_context(result_filename, context_filename, stylesheet_name, queryname):
     directory = os.path.dirname(os.path.realpath(__file__))
     json_filename = directory + "/fetchinfo.json"
     context_file = open(context_filename, "a")
-    context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>")
+    context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
     context_file.writelines("<context_list level=\"" + str(context_level) + "\">")
     context_file.flush()
 
@@ -77,6 +77,7 @@ def find_context(result_filename, context_filename, stylesheet_name, queryname):
 
 
 #Iterate over all inputfiles:
+count = 0
 for inputfile in clamdata.input:
     queryname = os.path.basename(str(inputfile))     # bh_lq01.mql
     filename = os.path.splitext(queryname)           # [ bh_lq01, .mql ]
@@ -84,10 +85,13 @@ for inputfile in clamdata.input:
     context_filename = outputdir + filename[0] + "-context.xml"
 
     result = execute_query(inputfile, result_filename, queryname)
-
+    count += 1
     if (result):
+        clam.common.status.write(statusfile, "Executed query " + queryname, (count/total_filecount) * 50)
         try:
+            clam.common.status.write(statusfile, "Trying to find context for query " + queryname, (count/total_filecount) * 50)
             find_context(result_filename, context_filename, "base", queryname)
+            clam.common.status.write(statusfile, "Found context for " + queryname, (count/total_filecount) * 100)
         except EmdrosException as eex:
             os.rename(context_filename, context_filename + ".error")
             msg = "Error while gathering context for '" + queryname + "'.\n" + str(eex.args) + "\nSee " \

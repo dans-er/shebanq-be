@@ -46,7 +46,13 @@ PROFILES = [
         OutputTemplate('mql-result', UndefinedXMLFormat, 'MQL Query Results',
             SetMetaField('encoding','utf-8'),
             removeextension='.mql',
-            extension='.xml',
+            extension='-result.xml',
+            multi=True
+        ),
+        OutputTemplate('mql-context', UndefinedXMLFormat, 'Context of Query Results',
+            SetMetaField('encoding','utf-8'),
+            removeextension='.mql',
+            extension='-context.xml',
             multi=True
         )
     )

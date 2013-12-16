@@ -175,12 +175,12 @@ class FindObjectsHandler(xml.sax.ContentHandler):
         if name == "mse" and self.straw_level == self.context_level:
             first_monad = int(attrs.getValue("first"))
             last_monad = int(attrs.getValue("last"))
-            self.context_monatset.append([first_monad, last_monad])
+            self.context_monatset.append((first_monad, last_monad))
 
         if name == "mse" and self.focus:
             first_monad = int(attrs.getValue("first"))
             last_monad = int(attrs.getValue("last"))
-            self.focus_monatset.append([first_monad, last_monad])
+            self.focus_monatset.append((first_monad, last_monad))
 
     def endElement(self, name):
         if name == "straw":
