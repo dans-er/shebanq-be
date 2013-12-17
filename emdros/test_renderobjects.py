@@ -3,9 +3,8 @@
 
 import os
 import unittest
-import sys
 from command import RenderObjects
-from command import EmdrosException
+from command import ContextHandlerType
 
 
 class TestRenderObjects(unittest.TestCase):
@@ -44,15 +43,15 @@ class TestRenderObjects(unittest.TestCase):
             result_file.close()
             os.remove(result_filename)
 
-    def test_find_objects(self):
+    def test_find_objects_by_level(self):
         ro = RenderObjects()
         json_filename = "test_files/input/ro_01.json"
-        mql_result_filename = "test_files/input/bh_lq01-result.xml"
+        mql_result_filename = "test_files/input/bh_lq04-result.xml"
 
 
         result_filename = "test_files/output/" \
             + os.path.splitext(os.path.basename(mql_result_filename))[0] \
-            + "-context" \
+            + "-context_level" \
             + ".xml"
 
         result_file = open(result_filename, "a")
@@ -62,6 +61,25 @@ class TestRenderObjects(unittest.TestCase):
         ro.find_objects(mql_result_filename, json_filename, result_file, context_level=0)
 
         result_file.writelines("</context_list>")
+        result_file.close()
+
+    def test_find_objects_by_marks(selfself):
+        ro = RenderObjects()
+        json_filename = "test_files/input/ro_01.json"
+        mql_result_filename = "test_files/input/bh_lq02_verse_mark-result.xml"
+
+        result_filename = "test_files/output/" \
+            + os.path.splitext(os.path.basename(mql_result_filename))[0] \
+            + "-context_level" \
+            + ".xml"
+
+        result_file = open(result_filename, "a")
+        result_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<context_list>")
+        result_file.flush()
+
+        ro.find_objects(mql_result_filename, json_filename, result_file, handler_type=ContextHandlerType.marks)
+
+        result_file.writelines("\n</context_list>")
         result_file.close()
 
 

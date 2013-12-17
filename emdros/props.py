@@ -52,5 +52,10 @@ ro_stylesheet = "base"
 ro_output = "-"
 ro_timeout = 60
 
+#ContextMarksHandler options:
+#
+# the keyword after de 'tick' in an object that is marked as the context for the query result.
+context_mark_keyword = "context"
+
 
 
