@@ -49,7 +49,7 @@ PROFILES = [
             extension='-result.xml',
             multi=True
         ),
-        OutputTemplate('mql-context', UndefinedXMLFormat, 'Context of Query Results',
+        OutputTemplate('mql-context', UndefinedXMLFormat, 'Context for Query Results',
             SetMetaField('encoding','utf-8'),
             removeextension='.mql',
             extension='-context.xml',
@@ -61,11 +61,18 @@ PROFILES = [
 COMMAND = sys.path[0] + "/wrappers/emdroswrapper02.py $DATAFILE $STATUSFILE $OUTPUTDIRECTORY $PARAMETERS > $OUTPUTDIRECTORY/log"
 
 PARAMETERS =  [
-    ('Context level', [
+    ('Context settings', [
         #BooleanParameter(id='createlexicon',name='Create Lexicon',description='Generate a separate overall lexicon?'),
         #ChoiceParameter(id='casesensitive',name='Case Sensitivity',description='Enable case sensitive behaviour?', choices=['yes','no'],default='no'),
         #StringParameter(id='author',name='Author',description='Sign output metadata with the specified author name',maxlength=255),
-        IntegerParameter(id='contextlevel',name='Offset',description='Limit result context to straw depth',default=0)
+        ChoiceParameter(id='contexthandlername',name='Context handler name',
+                        description='What type of context handler should be used?',
+                        choices=['level','marks'],default='level'),
+        IntegerParameter(id='contextlevel',name='Context Level',
+                         description='Limit context to straw depth. Used with level-handler.',default=0),
+        StringParameter(id='contextmark',name='Context Mark',
+                        description='Keyword indicating object in query as context. Used with marks-handler.',
+                        default="context", maxlength=255)
     ] )
 ]
 

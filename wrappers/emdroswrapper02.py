@@ -8,6 +8,7 @@ import logging
 from emdros.command import MQL
 from emdros.command import RenderObjects
 from emdros.command import EmdrosException
+from emdros.command import ContextHandlerType
 
 #import CLAM-specific modules:
 import clam.common.data
@@ -30,12 +31,16 @@ logging.basicConfig(
 clamdata = clam.common.data.getclamdata(datafile)
 
 total_filecount = len(clamdata.input)
+context_handler_name = clamdata.parameter("contexthandlername").value
 context_level = clamdata.parameter("contextlevel").value
-
+context_mark = clamdata.parameter("contextmark").value
 
 clam.common.status.write(statusfile, "Iterating over " + str(total_filecount) + " input files..." )
-clam.common.status.write(statusfile, "Context level is " + str(context_level))
-
+clam.common.status.write(statusfile, "Context handler name: '" + context_handler_name + "'" )
+if context_handler_name == "level":
+    clam.common.status.write(statusfile, "Context level: " + str(context_level))
+elif context_handler_name == "marks":
+    clam.common.status.write(statusfile, "Context mark: '" + context_mark + "'")
 mql = MQL()
 ro = RenderObjects()
 
@@ -61,11 +66,18 @@ def find_context(result_filename, context_filename, stylesheet_name, queryname):
     json_filename = directory + "/fetchinfo.json"
     context_file = open(context_filename, "a")
     context_file.writelines("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n")
-    context_file.writelines("<context_list level=\"" + str(context_level) + "\">")
+    if context_handler_name == "level":
+        context_handler_type = ContextHandlerType.level
+        context_file.writelines("<context_list context_level=\"" + str(context_level) + "\">")
+    elif context_handler_name == "marks":
+        context_handler_type = ContextHandlerType.marks
+        context_file.writelines("<context_list context_mark=\"" + context_mark + "\">")
     context_file.flush()
 
     try:
-        ro.find_objects(result_filename, json_filename, context_file, stylesheet_name, context_level)
+        ro.find_objects(result_filename, json_filename, context_file, stylesheet_name, context_handler_type,
+                        context_level=context_level,
+                        context_mark=context_mark)
 
         logging.info("Found context list for file '" + queryname + "'")
     except EmdrosException as eex:
@@ -89,7 +101,8 @@ for inputfile in clamdata.input:
     if (result):
         clam.common.status.write(statusfile, "Executed query " + queryname, (count/total_filecount) * 50)
         try:
-            clam.common.status.write(statusfile, "Trying to find context for query " + queryname, (count/total_filecount) * 50)
+            clam.common.status.write(
+                statusfile, "Trying to find context for query " + queryname, (count/total_filecount) * 50)
             find_context(result_filename, context_filename, "base", queryname)
             clam.common.status.write(statusfile, "Found context for " + queryname, (count/total_filecount) * 100)
         except EmdrosException as eex:

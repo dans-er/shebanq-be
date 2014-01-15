@@ -63,7 +63,7 @@ class TestRenderObjects(unittest.TestCase):
         result_file.writelines("</context_list>")
         result_file.close()
 
-    def test_find_objects_by_marks(selfself):
+    def test_find_objects_by_marks(self):
         ro = RenderObjects()
         json_filename = "test_files/input/ro_01.json"
         mql_result_filename = "test_files/input/bh_lq02_verse_mark-result.xml"
