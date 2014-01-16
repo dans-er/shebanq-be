@@ -51,6 +51,7 @@ mql_timeout = 60
 ro_stylesheet = "base"
 ro_output = "-"
 ro_timeout = 60
+ro_max_result_file_size = 100000
 
 #ContextMarksHandler options:
 #

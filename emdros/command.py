@@ -4,6 +4,7 @@
 import subprocess
 import xml.sax
 import props
+import os.path
 
 
 def version(process):
@@ -87,8 +88,13 @@ class MQL(EmdrosProcess):
             result_file.close()
 
 
-class UnknownContextHandlerError(Exception):
+class UnknownContextHandlerError(EmdrosException):
     """Indicates that an AbstractContextHandler is unknown"""
+
+
+class ResultFileTooLargeForRenderingException(EmdrosException):
+    """Indicates that a mql result is too large for the render process"""
+
 
 class ContextHandlerType():
     level = "level"
@@ -112,6 +118,7 @@ class RenderObjects(EmdrosProcess):
         stylesheet_name --  name of the stylesheet within json 'fetchinfo' object.
                             Defaults to value of props.ro_stylesheet
         """
+
         p = subprocess.Popen([self.process,
                               "-h", props.emdros_host,
                               "-u", props.emdros_user,
@@ -160,12 +167,21 @@ class RenderObjects(EmdrosProcess):
             Used for the 'marks' handler_type.
             Defaults to props.context_mark_keyword.
         """
+
+
         if handler_type == ContextHandlerType.level:
             handler = ContextLevelHandler(self, json_filename, result_file, stylesheet_name, context_level)
         elif handler_type == ContextHandlerType.marks:
             handler = ContextMarksHandler(self, json_filename, result_file, stylesheet_name, context_mark)
         else:
             raise UnknownContextHandlerError("Unknown handler_type: " + handler_type)
+
+        file_size = os.path.getsize(mql_result_filename)
+        if file_size > props.ro_max_result_file_size:
+            raise ResultFileTooLargeForRenderingException('Result too large for rendering. '
+                + 'MQL Result file size is ' + str(file_size) + ' '
+                + 'Max result file size is ' + str(props.ro_max_result_file_size))
+
         source = open(mql_result_filename)
         try:
             xml.sax.parse(source, handler)
